@@ -1,0 +1,28 @@
+{
+  "name": "occulto",
+  "version": "1.0.1",
+  "description": "crypt utility",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsnd --respawn --no-notify src/index.ts",
+    "test": "npm run build && mocha",
+    "prepublish": "rm -r ./lib && npm run test"
+  },
+  "keywords": [
+    ""
+  ],
+  "author": "Niccolo Borgioli",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^11.12.1",
+    "@types/node-forge": "^0.8.2",
+    "mocha": "^6",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.3"
+  },
+  "dependencies": {
+    "node-forge": "^0.8.2"
+  }
+}
