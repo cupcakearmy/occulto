@@ -1,7 +1,23 @@
 const { describe, it } = require('mocha')
 const a = require('assert')
 
-const { RSA, AES } = require('../').default
+
+describe('Check imports', () => {
+    it('default', () => {
+        const Occulto = require('../').default
+
+        a.notStrictEqual(undefined, Occulto.RSA)
+        a.notStrictEqual(undefined, Occulto.AES)
+    })
+    it('normal', () => {
+        const {RSA, AES} = require('../')
+
+        a.notStrictEqual(undefined, RSA)
+        a.notStrictEqual(undefined, AES)
+    })
+})
+
+const { RSA, AES } = require('../')
 
 describe('Asymmetric', () => {
 

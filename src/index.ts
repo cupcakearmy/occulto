@@ -5,3 +5,8 @@ export default {
 	RSA,
 	AES,
 }
+
+export {
+	AES,
+	RSA,
+}
