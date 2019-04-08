@@ -14,7 +14,7 @@ export default class RSA {
 	static gen = (size: number = 2 ** 12): Promise<KeyPair> => new Promise<KeyPair>((resolve, reject) => {
 		// @ts-ignore
 		generateKeyPair('rsa', {
-			modulusLength: 4096,
+			modulusLength: size,
 			publicKeyEncoding: { type: 'pkcs1', format: 'pem' },
 			privateKeyEncoding: { type: 'pkcs1', format: 'pem' },
 		}, (err: string, pub: string, prv: string) => {
