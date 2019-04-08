@@ -1,12 +1,12 @@
-import AES from './AES'
 import RSA from './RSA'
+import Symmetric from './Symmetric'
 
-export default {
+const exp = {
 	RSA,
-	AES,
+	Symmetric,
 }
 
-export {
-	AES,
-	RSA,
+module.exports = {
+	...exp,
+	default: exp,
 }
