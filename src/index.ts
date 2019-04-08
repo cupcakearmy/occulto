@@ -12,4 +12,4 @@ module.exports = {
 }
 
 // Require node 11
-if(parseInt(process.versions.node.split('.')[0]) < 11) throw new Error('Node 11 or higher is required')
+if(parseInt(process.versions.node.split('.')[0]) < 10) throw new Error('Node 10 or higher is required')
