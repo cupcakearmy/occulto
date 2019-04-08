@@ -7,22 +7,21 @@ describe('Check imports', () => {
         const Occulto = require('../').default
 
         a.notStrictEqual(undefined, Occulto.RSA)
-        a.notStrictEqual(undefined, Occulto.AES)
+        a.notStrictEqual(undefined, Occulto.Symmetric)
     })
     it('normal', () => {
-        const {RSA, AES} = require('../')
+        const { RSA, Symmetric } = require('../')
 
         a.notStrictEqual(undefined, RSA)
-        a.notStrictEqual(undefined, AES)
+        a.notStrictEqual(undefined, Symmetric)
     })
 })
 
-const { RSA, AES } = require('../')
+const { RSA, Symmetric } = require('../')
 
 describe('Asymmetric', () => {
 
     describe('RSA', () => {
-
         it('Encrypt and Decrypt small string', async () => {
             const pair = await RSA.gen(2 ** 10)
             const text = `some small string`
@@ -30,7 +29,6 @@ describe('Asymmetric', () => {
             const d = RSA.decrypt(e, pair.prv)
             a.strictEqual(text, d)
         })
-
     })
 
 })
@@ -42,39 +40,31 @@ describe('Symmetric', () => {
     const dataShort = `a sentence`
     const dataLong = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
 
-    describe('AES', () => {
+    describe('Symmetric', () => {
 
         describe('Default', () => {
             it('Short', () => {
-                const e = AES.encrypt(dataShort, keyShort)
-                const d = AES.decrypt(e, keyShort)
+                const e = Symmetric.encrypt(dataShort, keyShort)
+                const d = Symmetric.decrypt(e, keyShort)
                 a.strictEqual(dataShort, d)
             })
             it('Long', () => {
-                const e = AES.encrypt(dataLong, keyLong)
-                const d = AES.decrypt(e, keyLong)
+                const e = Symmetric.encrypt(dataLong, keyLong)
+                const d = Symmetric.decrypt(e, keyLong)
                 a.strictEqual(dataLong, d)
             })
         })
 
-        describe('GCM', () => {
-            it('128', () => {
-                const e = AES.encrypt(dataShort, keyShort, AES.Ciphers.AES_128_GCM)
-                const d = AES.decrypt(e, keyShort)
-                a.strictEqual(dataShort, d)
-            })
-            it('192', () => {
-                const e = AES.encrypt(dataShort, keyShort, AES.Ciphers.AES_192_GCM)
-                const d = AES.decrypt(e, keyShort)
-                a.strictEqual(dataShort, d)
-            })
-            it('256', () => {
-                const e = AES.encrypt(dataShort, keyShort, AES.Ciphers.AES_256_GCM)
-                const d = AES.decrypt(e, keyShort)
-                a.strictEqual(dataShort, d)
-            })
+        describe('All Ciphers', () => {
+            for (const [key, value] of Object.entries(Symmetric.Ciphers)) {
+                if (!isNaN(key)) continue
+                it(key, () => {
+                    const e = Symmetric.encrypt(dataShort, keyShort, value)
+                    const d = Symmetric.decrypt(e, keyShort)
+                    a.strictEqual(dataShort, d)
+                })
+            }
         })
 
     })
-
 })
