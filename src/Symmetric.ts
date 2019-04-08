@@ -16,7 +16,6 @@ import { Base64 } from './Util'
 
 export enum Ciphers {
 	ChaCha20,
-	ChaCha20_Poly1305,
 	AES_256_GCM,
 	AES_192_GCM,
 	AES_128_GCM,
@@ -144,13 +143,6 @@ export default class Symmetric {
 					alg: 'chacha20',
 					ivSize: 16,
 					keySize: 32,
-				}
-			case Ciphers.ChaCha20_Poly1305:
-				return {
-					alg: 'chacha20-poly1305',
-					ivSize: 16,
-					keySize: 32,
-					mac: 8,
 				}
 		}
 	}
