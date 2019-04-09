@@ -1,15 +1,14 @@
-import RSA from './RSA'
-import Symmetric from './Symmetric'
+import RSA_Internal from './RSA'
+import Symmetric_Internal from './Symmetric'
 
-const exp = {
+export const RSA = RSA_Internal
+export const Symmetric = Symmetric_Internal
+
+
+export default {
 	RSA,
 	Symmetric,
 }
 
-module.exports = {
-	...exp,
-	default: exp,
-}
-
 // Require node 11
-if(parseInt(process.versions.node.split('.')[0]) < 10) throw new Error('Node 10 or higher is required')
+if (parseInt(process.versions.node.split('.')[0]) < 10) throw new Error('Node 10 or higher is required')
