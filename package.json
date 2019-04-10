@@ -1,6 +1,6 @@
 {
   "name": "occulto",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "crypt utility",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
