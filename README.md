@@ -1,6 +1,8 @@
 # occulto 🔒
 
-High leven wrapper around [forge](https://github.com/digitalbazaar/forge).
+High level wrapper around [forge](https://github.com/digitalbazaar/forge).
+
+Supports Hashes, Symmetric AES & ChaCha20 ciphers and Asymmetric RSA.
 
 **Typescript typings included**
 
@@ -9,7 +11,7 @@ High leven wrapper around [forge](https://github.com/digitalbazaar/forge).
 ###### Install
 
 ```
-npm i occulto
+npm i node-forge occulto
 ```
 
 ```javascript
@@ -62,36 +64,57 @@ const encrypted = RSA.encrypt('some text', pair.pub)
 const decrypted = RSA.decrypt(encrypted, pair.prv)
 ```
 
-## AES
+## Symmetric
 
-### `AES.Ciphers`
+### `Symmetric.Ciphers`
 
 Available ciphers
 
+- `Ciphers.ChaCha20`
 - `Ciphers.AES_256_GCM`
 - `Ciphers.AES_192_GCM`
 - `Ciphers.AES_128_GCM`
+- `Ciphers.AES_256_CTR`
+- `Ciphers.AES_192_CTR`
+- `Ciphers.AES_128_CTR`
 
-#### `AES.encrypt(data: string, key: string, type: Ciphers = Ciphers.AES_256_GCM)`
+#### `Symmetric.encrypt(data: string, key: string, type: Ciphers = Ciphers.AES_256_GCM)`
 
 Encrypts a string.
-Defaults to `Ciphers.AES_256_GCM`
+Defaults to `Ciphers.AES_256_CTR`
 
 ###### Examples
 
 ```javascript
-const encrypted = AES.encrypt('some string' , 'myPass')
+const encrypted = Symmetric.encrypt('some string' , 'myPass')
 
-const e = AES.encrypt('some string' , 'myPass', Ciphers.AES_128_GCM)
+const e = Symmetric.encrypt('some string' , 'myPass', Ciphers.AES_128_GCM)
 ```
 
-#### `RSA.decrypt(e: string, key: string)`
+## Hash
 
-Decrypt data encrypted by `AES.encrypt()`
+### `Hash.Hashes`
 
-###### Example
+Available hashes
+
+- `Hashes.MD5`
+- `Hashes.SHA1_1`
+- `Hashes.SHA1_256`
+- `Hashes.SHA1_512`
+- `Hashes.SHA3_256`
+- `Hashes.SHA3_384`
+- `Hashes.SHA3_512`
+
+#### `Hash.digest(s: string, type: Hashes = Hashes.SHA3_256)`
+
+Calculates the hash of a string.
+Defaults to `Hashes.SHA3_256`
+
+###### Examples
 
 ```javascript
-const encrypted = AES.encrypt('some string' , 'myPass')
-const decrypted = AES.decrypt(encrypted , 'myPass')
+const hash = Hash.digest('something')
+
+const h = Hash.digest('something', Hashes.MD5)
+
 ```

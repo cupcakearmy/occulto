@@ -1,6 +1,6 @@
 {
   "name": "occulto",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "crypt utility",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -9,6 +9,7 @@
     "url": "https://github.com/CupCakeArmy/occulto"
   },
   "scripts": {
+    "docs": "typedoc --out ./docs ./src",
     "build": "tsc",
     "dev": "tsnd --respawn --no-notify src/index.ts",
     "test": "npm run build && mocha",
@@ -24,11 +25,12 @@
   "author": "Niccolo Borgioli",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^11.13.1",
-    "@types/node-forge": "^0.8.2",
-    "mocha": "^6.1.1",
+    "@types/node": "11.x",
+    "@types/node-forge": "0.8.x",
+    "mocha": "6.x",
     "ts-node-dev": "^1.0.0-pre.32",
-    "typescript": "^3.4.2"
+    "typedoc": "^0.14.2",
+    "typescript": "3.5.x"
   },
   "dependencies": {}
 }
