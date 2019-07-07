@@ -37,6 +37,10 @@ const decrypted = Symmetric.decrypt(encrypted, 'myPadd')
 
 ## Hash
 
+<a href="https://cupcakearmy.github.io/occulto/enums/_hash_.hashes.html" target="_blank">Available hashes</a>
+
+[Available hashes](https://cupcakearmy.github.io/occulto/enums/_hash_.hashes.html)
+
 ```typescript
 import { Hash } from 'occulto'
 
