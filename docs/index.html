@@ -68,75 +68,29 @@
 				<p>High level wrapper around <a href="https://github.com/digitalbazaar/forge">forge</a>.</p>
 				<p>Supports Hashes, Symmetric AES &amp; ChaCha20 ciphers and Asymmetric RSA.</p>
 				<p><strong>Typescript typings included</strong></p>
+				<p><a href="https://cupcakearmy.github.io/occulto/index.html"><strong>📒 DOCS HERE 📒</strong></a></p>
 				<h2 id="quickstart-">Quickstart 🚀</h2>
 				<h6 id="install">Install</h6>
-				<pre><code>npm i <span class="hljs-keyword">node</span><span class="hljs-title">-forge</span> occulto</code></pre><pre><code class="language-javascript"><span class="hljs-comment">// Whatever import you prefer</span>
-<span class="hljs-comment">// const { RSA } = require('occulto')</span>
-<span class="hljs-keyword">import</span> { RSA } <span class="hljs-keyword">from</span> <span class="hljs-string">'occulto'</span>
+				<pre><code>npm i <span class="hljs-keyword">node</span><span class="hljs-title">-forge</span> occulto</code></pre><h3 id="examples">Examples</h3>
+				<h2 id="rsa"><a href="https://cupcakearmy.github.io/occulto/modules/_rsa_.html">RSA</a></h2>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { RSA } <span class="hljs-keyword">from</span> <span class="hljs-string">'occulto'</span>
 
 <span class="hljs-keyword">const</span> pair = <span class="hljs-keyword">await</span> RSA.gen()
-
-<span class="hljs-keyword">const</span> encrypted = RSA.encrypt(<span class="hljs-string">'some string'</span>, <span class="hljs-string">'myPass'</span>)
-<span class="hljs-keyword">const</span> decrypted = RSA.decrypt(encrypted, <span class="hljs-string">'myPass'</span>)
-</code></pre>
-				<h3 id="reference-">Reference 📒</h3>
-				<h2 id="rsa">RSA</h2>
-				<h4 id="rsa-gen-size-number-2-12-"><code>RSA.gen(size: number = 2 ** 12)</code></h4>
-				<ul>
-					<li>size: [optional, default=4096] Size of the RSA key</li>
-				</ul>
-				<h6 id="examples">Examples</h6>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> pair = <span class="hljs-keyword">await</span> RSA.gen() <span class="hljs-comment">// 4096-Bit</span>
-<span class="hljs-keyword">const</span> smallPair = <span class="hljs-keyword">await</span> RSA.gen(<span class="hljs-number">2</span>**<span class="hljs-number">10</span>) <span class="hljs-comment">// 1024-Bit</span></code></pre>
-				<h4 id="rsa-encrypt-data-string-key-publickey-"><code>RSA.encrypt(data: string, key: PublicKey)</code></h4>
-				<p>Encrypt message with public key</p>
-				<h6 id="example">Example</h6>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> pair = <span class="hljs-keyword">await</span> RSA.gen()
-<span class="hljs-keyword">const</span> encrypted = RSA.encrypt(<span class="hljs-string">'some text'</span>, pair.pub)</code></pre>
-				<h4 id="rsa-decrypt-data-string-key-privatekey-"><code>RSA.decrypt(data: string, key: PrivateKey)</code></h4>
-				<p>Decrypts a message encrypted with <code>RSA.encrypt()</code> with the private key</p>
-				<h6 id="example">Example</h6>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> pair = <span class="hljs-keyword">await</span> RSA.gen()
 <span class="hljs-keyword">const</span> encrypted = RSA.encrypt(<span class="hljs-string">'some text'</span>, pair.pub)
 <span class="hljs-keyword">const</span> decrypted = RSA.decrypt(encrypted, pair.prv)</code></pre>
-				<h2 id="symmetric">Symmetric</h2>
-				<h3 id="symmetric-ciphers"><code>Symmetric.Ciphers</code></h3>
-				<p>Available ciphers</p>
-				<ul>
-					<li><code>Ciphers.ChaCha20</code></li>
-					<li><code>Ciphers.AES_256_GCM</code></li>
-					<li><code>Ciphers.AES_192_GCM</code></li>
-					<li><code>Ciphers.AES_128_GCM</code></li>
-					<li><code>Ciphers.AES_256_CTR</code></li>
-					<li><code>Ciphers.AES_192_CTR</code></li>
-					<li><code>Ciphers.AES_128_CTR</code></li>
-				</ul>
-				<h4 id="symmetric-encrypt-data-string-key-string-type-ciphers-ciphers-aes_256_gcm-"><code>Symmetric.encrypt(data: string, key: string, type: Ciphers = Ciphers.AES_256_GCM)</code></h4>
-				<p>Encrypts a string.
-				Defaults to <code>Ciphers.AES_256_CTR</code></p>
-				<h6 id="examples">Examples</h6>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> encrypted = Symmetric.encrypt(<span class="hljs-string">'some string'</span> , <span class="hljs-string">'myPass'</span>)
+				<h2 id="symmetric"><a href="https://cupcakearmy.github.io/occulto/modules/_symmetric_.html">Symmetric</a></h2>
+				<p><a href="https://cupcakearmy.github.io/occulto/enums/_symmetric_.ciphers.html">Available Ciphers</a></p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Symmetric } <span class="hljs-keyword">from</span> <span class="hljs-string">'occulto'</span>
 
-<span class="hljs-keyword">const</span> e = Symmetric.encrypt(<span class="hljs-string">'some string'</span> , <span class="hljs-string">'myPass'</span>, Ciphers.AES_128_GCM)</code></pre>
-				<h2 id="hash">Hash</h2>
-				<h3 id="hash-hashes"><code>Hash.Hashes</code></h3>
-				<p>Available hashes</p>
-				<ul>
-					<li><code>Hashes.MD5</code></li>
-					<li><code>Hashes.SHA1_1</code></li>
-					<li><code>Hashes.SHA1_256</code></li>
-					<li><code>Hashes.SHA1_512</code></li>
-					<li><code>Hashes.SHA3_256</code></li>
-					<li><code>Hashes.SHA3_384</code></li>
-					<li><code>Hashes.SHA3_512</code></li>
-				</ul>
-				<h4 id="hash-digest-s-string-type-hashes-hashes-sha3_256-"><code>Hash.digest(s: string, type: Hashes = Hashes.SHA3_256)</code></h4>
-				<p>Calculates the hash of a string.
-				Defaults to <code>Hashes.SHA3_256</code></p>
-				<h6 id="examples">Examples</h6>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> hash = Hash.digest(<span class="hljs-string">'something'</span>)
+<span class="hljs-keyword">const</span> encrypted = Symmetric.encrypt(<span class="hljs-string">'some string'</span> , <span class="hljs-string">'myPass'</span>, Symmetric.Ciphers.AES_128_GCM)
+<span class="hljs-keyword">const</span> decrypted = Symmetric.decrypt(encrypted, <span class="hljs-string">'myPadd'</span>)</code></pre>
+				<h2 id="hash"><a href="https://cupcakearmy.github.io/occulto/modules/_hash_.html">Hash</a></h2>
+				<p><a href="https://cupcakearmy.github.io/occulto/enums/_hash_.hashes.html">Available hashes</a></p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Hash } <span class="hljs-keyword">from</span> <span class="hljs-string">'occulto'</span>
 
-<span class="hljs-keyword">const</span> h = Hash.digest(<span class="hljs-string">'something'</span>, Hashes.MD5)
+<span class="hljs-keyword">const</span> hash = Hash.digest(<span class="hljs-string">'something'</span>)
+
+<span class="hljs-keyword">const</span> h = Hash.digest(<span class="hljs-string">'something'</span>, Hash.Hashes.MD5)
 </code></pre>
 			</div>
 		</div>
