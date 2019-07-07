@@ -1,5 +1,6 @@
 import { createHash } from 'crypto'
 
+
 enum Hashes {
 	MD5 = 'md5',
 	SHA1_1 = 'sha1',
@@ -14,5 +15,11 @@ export default class Hash {
 
 	static Hashes = Hashes
 
-	static digest = (s: string, type: Hashes = Hashes.SHA3_256): string => createHash(type).update(s).digest().toString('hex')
+	/**
+	 *
+	 * @param {string} plain Input string
+	 * @param {Hashes} type Type of hash to be used to digest
+	 * @returns {string} Hash of the plain text
+	 */
+	static digest = (plain: string, type: Hashes = Hashes.SHA3_256): string => createHash(type).update(plain).digest().toString('hex')
 }

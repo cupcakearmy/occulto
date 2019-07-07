@@ -11,6 +11,11 @@ export type KeyPair = {
 
 export default class RSA {
 
+	/**
+	 *
+	 * @param {number} size Number of bits for the key
+	 * @returns {Promise<KeyPair>} Object that contains the key pair
+	 */
 	static gen = (size: number = 2 ** 12): Promise<KeyPair> => new Promise<KeyPair>((resolve, reject) => {
 		// @ts-ignore
 		generateKeyPair('rsa', {
@@ -26,8 +31,20 @@ export default class RSA {
 		})
 	})
 
-	static encrypt = (data: string, key: PublicKey): string => publicEncrypt(key, Buffer.from(data)).toString('base64')
+	/**
+	 *
+	 * @param {string} plain
+	 * @param {PublicKey} key
+	 * @returns {string} Encrypted string
+	 */
+	static encrypt = (plain: string, key: PublicKey): string => publicEncrypt(key, Buffer.from(plain)).toString('base64')
 
-	static decrypt = (data: string, key: PrivateKey): string => privateDecrypt(key, Buffer.from(data, 'base64')).toString()
+	/**
+	 *
+	 * @param {string} encrypted
+	 * @param {PrivateKey} key
+	 * @returns {string} Decrypted string
+	 */
+	static decrypt = (encrypted: string, key: PrivateKey): string => privateDecrypt(key, Buffer.from(encrypted, 'base64')).toString()
 
 }

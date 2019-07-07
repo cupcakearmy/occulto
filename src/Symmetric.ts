@@ -46,18 +46,25 @@ export default class Symmetric {
 	static Ciphers = Ciphers
 	static Encoding: BufferEncoding = 'base64'
 
-	static encrypt(data: string, pass: string, type: Ciphers = Ciphers.AES_256_CTR): string {
+	/**
+	 *
+	 * @param plain {string} data The data to be encrypted
+	 * @param key {string} The encryption key
+	 * @param type {Ciphers} [type=Ciphers.AES_256_CTR]    The cipher that will be used
+	 * @returns {string} Encrypted data as string
+	 */
+	static encrypt(plain: string, key: string, type: Ciphers = Ciphers.AES_256_CTR): string {
 		const { alg, ivSize, mac, keySize } = Symmetric.getCipherConfig(type)
 
 		const iv = randomBytes(ivSize)
 		const salt = randomBytes(keySize)
-		const key = scryptSync(pass, salt, keySize)
+		const keyBuffered = scryptSync(Buffer.from(key), salt, keySize)
 
-		// @ts-ignore
-		const options: TransformOptions = mac ? { authTagLength: mac } : undefined
-		const cipher: CipherGCM | CipherCCM | Cipher = createCipheriv(alg, key, iv, options)
+
+		const options: TransformOptions | undefined = mac ? { authTagLength: mac } as TransformOptions : undefined
+		const cipher: CipherGCM | CipherCCM | Cipher = createCipheriv(alg, keyBuffered, iv, options)
 		let content: Buffer = Buffer.concat([
-			cipher.update(data),
+			cipher.update(Buffer.from(plain)),
 			cipher.final(),
 		])
 
@@ -78,13 +85,19 @@ export default class Symmetric {
 		return Base64.encode(JSON.stringify(encrypted))
 	}
 
-	static decrypt(e: string, pass: string): string {
-		const { alg, data, iv, tag, salt, keySize, tagSize }: EncryptedItem = JSON.parse(Base64.decode(e))
-		const key = scryptSync(pass, Buffer.from(salt, Symmetric.Encoding), keySize)
+	/**
+	 *
+	 * @param {string} encrypted The encrypted string
+	 * @param {string} key The key used for encrypting
+	 * @returns {string} The data as string
+	 */
+	static decrypt(encrypted: string, key: string): string {
+		const { alg, data, iv, tag, salt, keySize, tagSize }: EncryptedItem = JSON.parse(Base64.decode(encrypted))
+		const keyBuffered = scryptSync(Buffer.from(key), Buffer.from(salt, Symmetric.Encoding), keySize)
 
 		// @ts-ignore
 		const options: TransformOptions = tag ? { authTagLength: tagSize } : undefined
-		const decipher: DecipherGCM | DecipherCCM | Decipher = createDecipheriv(alg, key, Buffer.from(iv, Symmetric.Encoding), options)
+		const decipher: DecipherGCM | DecipherCCM | Decipher = createDecipheriv(alg, keyBuffered, Buffer.from(iv, Symmetric.Encoding), options)
 
 		// @ts-ignore
 		if (tag) decipher.setAuthTag(Buffer.from(tag, Symmetric.Encoding))
