@@ -21,6 +21,8 @@ npm i node-forge occulto
 ## [RSA](https://cupcakearmy.github.io/occulto/modules/_rsa_.html)
 
 ```typescript
+import { RSA } from 'occulto'
+
 const pair = await RSA.gen()
 const encrypted = RSA.encrypt('some text', pair.pub)
 const decrypted = RSA.decrypt(encrypted, pair.prv)
