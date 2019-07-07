@@ -6,6 +6,8 @@ Supports Hashes, Symmetric AES & ChaCha20 ciphers and Asymmetric RSA.
 
 **Typescript typings included**
 
+[**📒 DOCS HERE 📒**](https://cupcakearmy.github.io/occulto/index.html)
+
 ## Quickstart 🚀
 
 ###### Install
@@ -14,11 +16,9 @@ Supports Hashes, Symmetric AES & ChaCha20 ciphers and Asymmetric RSA.
 npm i node-forge occulto
 ```
 
-[**📒 DOCS HERE 📒**](https://cupcakearmy.github.io/occulto/index.html)
-
 ### Examples 
 
-## RSA
+## [RSA](https://cupcakearmy.github.io/occulto/modules/_rsa_.html)
 
 ```typescript
 const pair = await RSA.gen()
@@ -26,7 +26,9 @@ const encrypted = RSA.encrypt('some text', pair.pub)
 const decrypted = RSA.decrypt(encrypted, pair.prv)
 ```
 
-## Symmetric
+## [Symmetric](https://cupcakearmy.github.io/occulto/modules/_symmetric_.html)
+
+[Available Ciphers](https://cupcakearmy.github.io/occulto/enums/_symmetric_.ciphers.html)
 
 ```javascript
 import { Symmetric } from 'occulto'
@@ -35,9 +37,7 @@ const encrypted = Symmetric.encrypt('some string' , 'myPass', Symmetric.Ciphers.
 const decrypted = Symmetric.decrypt(encrypted, 'myPadd')
 ```
 
-## Hash
-
-<a href="https://cupcakearmy.github.io/occulto/enums/_hash_.hashes.html" target="_blank">Available hashes</a>
+## [Hash](https://cupcakearmy.github.io/occulto/modules/_hash_.html)
 
 [Available hashes](https://cupcakearmy.github.io/occulto/enums/_hash_.hashes.html)
 
