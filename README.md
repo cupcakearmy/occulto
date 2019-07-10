@@ -17,7 +17,7 @@ Supports Hashes, Symmetric AES & ChaCha20 ciphers and Asymmetric RSA.
 ###### Install
 
 ```
-npm i node-forge occulto
+npm i occulto
 ```
 
 ### Examples 
