@@ -9,7 +9,7 @@
     "url": "https://github.com/CupCakeArmy/occulto"
   },
   "scripts": {
-    "docs": "typedoc --out ./docs ./src",
+    "docs": "typedoc --out ./docs ./src && touch ./docs/.nojekyll",
     "build": "tsc",
     "dev": "tsnd --respawn --no-notify src/index.ts",
     "test": "npm run build && mocha",
