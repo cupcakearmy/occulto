@@ -1,14 +1,18 @@
 # occulto 🔒
 
-High level wrapper around [forge](https://github.com/digitalbazaar/forge).
+High level wrapper around the [node native crypto API](https://nodejs.org/api/crypto.html).
+
+**No Deps & Typescript typings included**
 
 Supports Hashes, Symmetric AES & ChaCha20 ciphers and Asymmetric RSA.
-
-**Typescript typings included**
 
 [**📒 DOCS HERE 📒**](https://cupcakearmy.github.io/occulto/index.html)
 
 ## Quickstart 🚀
+
+###### Requirements
+
+- Node >= 11 required (ChaCha20)
 
 ###### Install
 
