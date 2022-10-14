@@ -30,4 +30,17 @@ export const Precomputed = {
         '9f7ff06148d415b12290ab7c21f021964ed627574f94f66c994aad4a8e319aa3168a9871edace3e736096cbd957cafa42dbf3feb6efd7763bf936ddc933c9470',
     },
   },
+  Crypto: {
+    Bytes: {
+      14: 'e0b28a24252963ff30dd2bb3ec9c',
+      16: '65eeb2044e9eb115956dbf4d0d70cd8f',
+      24: '9fa9e0aace3b0bdcbc871aa3ee3ddb1bece759b811fa4603',
+      32: '848ca08f01f82e28bfa91c85d55ef2a98afd8b32c707c9c790e86b1c53a177e4',
+    },
+    Messages: {
+      test: 'test',
+      nietzscheIpsum:
+        'Marvelous intentions joy deceptions overcome sexuality spirit against. Selfish of marvelous play dead war snare eternal-return ultimate. Reason aversion suicide.',
+    },
+  },
 }

@@ -1,24 +1,37 @@
 import { split, type TypedArray } from '../utils/base.js'
 
 export class Base64 {
-  static encode(s: string): string {
-    return split<string>({
-      node() {
+  private static prefix = 'data:application/octet-stream;base64,'
+
+  static encode(s: TypedArray): Promise<string> {
+    return split({
+      async node() {
         return Buffer.from(s).toString('base64')
       },
-      browser() {
-        return btoa(s)
+      async browser() {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = function (event) {
+            const data = event.target?.result
+            if (typeof data === 'string') resolve(data.slice(Base64.prefix.length))
+            else reject(new Error('Failed to read file'))
+          }
+          reader.readAsDataURL(new Blob([s]))
+        })
       },
     })
   }
 
-  static decode(s: string): string {
+  static decode(s: string): Promise<TypedArray> {
     return split({
-      node() {
-        return Buffer.from(s, 'base64').toString('utf8')
+      async node() {
+        return Buffer.from(s, 'base64')
       },
-      browser() {
-        return atob(s)
+      async browser() {
+        const ab = await fetch(Base64.prefix + s)
+          .then((r) => r.blob())
+          .then((b) => b.arrayBuffer())
+        return new Uint8Array(ab)
       },
     })
   }

@@ -19,12 +19,14 @@ export enum Hashes {
   SHA_512 = 'SHA-512',
 }
 
-export async function hash(data: string, hash: Hashes): Promise<string>
-export async function hash(data: TypedArray, hash: Hashes): Promise<TypedArray>
-export async function hash(data: string | TypedArray, hash: Hashes): Promise<string | TypedArray> {
-  const isString = typeof data === 'string'
-  const c = await getCrypto()
-  const result = await c.subtle.digest(hash, isString ? Bytes.encode(data) : data)
-  const buf = new Uint8Array(result)
-  return isString ? Hex.encode(buf) : buf
+export class Hash {
+  static async hash(data: string, hash: Hashes): Promise<string>
+  static async hash(data: TypedArray, hash: Hashes): Promise<TypedArray>
+  static async hash(data: string | TypedArray, hash: Hashes): Promise<string | TypedArray> {
+    const isString = typeof data === 'string'
+    const c = await getCrypto()
+    const result = await c.subtle.digest(hash, isString ? Bytes.encode(data) : data)
+    const buf = new Uint8Array(result)
+    return isString ? Hex.encode(buf) : buf
+  }
 }
