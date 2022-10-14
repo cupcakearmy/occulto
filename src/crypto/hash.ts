@@ -8,8 +8,12 @@ export enum Hashes {
   SHA_512 = 'SHA-512',
 }
 
-export async function hash(data: string, hash: Hashes): Promise<string> {
+export async function hash(data: string, hash: Hashes): Promise<string>
+export async function hash(data: Uint8Array, hash: Hashes): Promise<Uint8Array>
+export async function hash(data: string | Uint8Array, hash: Hashes): Promise<string | Uint8Array> {
+  const isString = typeof data === 'string'
   const c = await getCrypto()
-  const result = await c.subtle.digest(hash, Bytes.encode(data))
-  return Hex.encode(result)
+  const result = await c.subtle.digest(hash, isString ? Bytes.encode(data) : data)
+  const buf = new Uint8Array(result)
+  return isString ? Hex.encode(buf) : buf
 }

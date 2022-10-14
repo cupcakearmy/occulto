@@ -25,7 +25,7 @@ export class Base64 {
 }
 
 export class Hex {
-  static encode(buffer: ArrayBuffer): string {
+  static encode(buffer: Uint8Array): string {
     let s = ''
     for (const i of new Uint8Array(buffer)) {
       s += i.toString(16).padStart(2, '0')
@@ -33,7 +33,7 @@ export class Hex {
     return s
   }
 
-  static decode(s: string): ArrayBuffer {
+  static decode(s: string): Uint8Array {
     const size = s.length / 2
     const buffer = new Uint8Array(size)
     for (let i = 0; i < size; i++) {
