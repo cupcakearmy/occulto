@@ -15,6 +15,12 @@
   ],
   "author": "Niccolo Borgioli",
   "license": "MIT",
+  "engines": {
+    "node": ">=16",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm",
+    "pnpm": "7"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -23,6 +29,9 @@
       "types": "./dist/esm/index.d.ts"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "docs": "typedoc",
     "test:node": "mocha",
