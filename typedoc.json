@@ -3,5 +3,8 @@
   "out": "./docs",
 
   "name": "Occulto",
-  "includeVersion": true
+  "includeVersion": true,
+
+  "excludeInternal": true,
+  "excludePrivate": true
 }
