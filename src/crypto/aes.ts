@@ -11,36 +11,13 @@ const Params = {
   },
 }
 
-export type IRKeyData = {
+export type KeyData = {
   name: 'PBKDF2'
   hash: Hashes
   iterations: number
   salt: TypedArray
   length: number
 }
-
-// type IRObject = {
-//   algorithm: string
-//   iv: TypedArray
-//   data: TypedArray
-//   derived?: {
-//     algorithm: 'PBKDF2'
-//     hash: 'SHA1'
-//     iterations: number
-//     salt: TypedArray
-//   }
-// }
-
-// /**
-//  * Intermediate representation of encrypted objects
-//  */
-// class IR {
-//   static delimiter = ':::' // delimiter with a character that is not allowed in base64 or hex
-
-//   // static parse(s: string): IRObject {
-//   //   const [algorithm, iv, data, derived] = s.split(IR.delimiter)
-//   // }
-// }
 
 /**
  * AES operation modes.
@@ -71,7 +48,7 @@ export class AES {
    * Derive a key from a password.
    * To be used if the password is not 128, 192 or 256 bits or human made, non generated keys.
    */
-  static async derive(key: string, options?: IRKeyData): Promise<[TypedArray, IRKeyData]> {
+  static async derive(key: string, options?: KeyData): Promise<[TypedArray, KeyData]> {
     options ??= {
       name: 'PBKDF2',
       hash: Hashes.SHA_512,
@@ -151,7 +128,7 @@ export class AES {
     const [name, hash, iterations, salt, length] = await this.split(header)
     if (!name || !hash || !iterations || !salt || !length) throw this.InvalidCiphertext
 
-    const options: IRKeyData = {
+    const options: KeyData = {
       name: Bytes.decode(name) as any,
       hash: Bytes.decode(hash) as any,
       iterations: parseInt(Bytes.decode(iterations)),
