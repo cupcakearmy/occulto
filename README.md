@@ -1,5 +1,9 @@
 # occulto 🔒
 
+> Occulto <kbd>/okˈkul.to/</kbd>
+>
+> _hidden, concealed. secret._
+
 High level wrapper around the [node native crypto API](https://nodejs.org/api/crypto.html).
 
 **No Deps & Typescript typings included**
