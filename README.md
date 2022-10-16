@@ -4,13 +4,15 @@
 >
 > _hidden, concealed. secret._
 
-High level wrapper around the [node native crypto API](https://nodejs.org/api/crypto.html).
+![version badge](https://badgen.net/npm/v/occulto)
+![downloads badge](https://badgen.net/npm/dt/occulto)
+![dependency count](https://badgen.net/bundlephobia/dependency-count/occulto)
+![minzip size badge](https://badgen.net/bundlephobia/minzip/occulto)
+![types badge](https://badgen.net/npm/types/occulto)
 
-**No Deps & Typescript typings included**
+Isomorphic encryption library that works both in the browser and node with _no dependencies_ and written in Typescript.
 
-Supports Hashes, Symmetric AES & ChaCha20 ciphers and Asymmetric RSA.
-
-[**📒 DOCS HERE 📒**](https://cupcakearmy.github.io/occulto/index.html)
+[**📒 API Documentation 📒**](https://occulto.pages.dev)
 
 ## Quickstart 🚀
 
@@ -24,32 +26,32 @@ Supports Hashes, Symmetric AES & ChaCha20 ciphers and Asymmetric RSA.
 npm i occulto
 ```
 
-### Examples
+## Examples
 
-## [RSA](https://cupcakearmy.github.io/occulto/modules/_rsa_.html)
+### [RSA](https://occulto.pages.dev/classes/RSA)
 
 ```typescript
 import { RSA } from 'occulto'
 
-const pair = await RSA.gen()
-const encrypted = RSA.encrypt('some text', pair.pub)
-const decrypted = RSA.decrypt(encrypted, pair.prv)
+const pair = await RSA.generateKeyPair()
+const encrypted = await RSA.encrypt('some text', pair.public)
+const decrypted = await RSA.decrypt(encrypted, pair.private)
 ```
 
-## [Symmetric](https://cupcakearmy.github.io/occulto/modules/_symmetric_.html)
+### [AES](https://occulto.pages.dev/classes/AES)
 
-[Available Ciphers](https://cupcakearmy.github.io/occulto/enums/_symmetric_.ciphers.html)
+[Available Modes](https://occulto.pages.dev/enums/Modes)
 
 ```javascript
 import { Symmetric } from 'occulto'
 
-const encrypted = Symmetric.encrypt('some string', 'myPass', Symmetric.Ciphers.AES_128_GCM)
-const decrypted = Symmetric.decrypt(encrypted, 'myPadd')
+const encrypted = await Symmetric.encryptEasy('some string', 'myPass')
+const decrypted = await Symmetric.decryptEasy(encrypted, 'myPass')
 ```
 
-## [Hash](https://cupcakearmy.github.io/occulto/modules/_hash_.html)
+### [Hash](https://occulto.pages.dev/classes/Hash)
 
-[Available hashes](https://cupcakearmy.github.io/occulto/enums/_hash_.hashes.html)
+[Available hashes](https://occulto.pages.dev/enums/Hashes)
 
 ```typescript
 import { Hash } from 'occulto'
