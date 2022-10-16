@@ -35,22 +35,26 @@
   "scripts": {
     "docs": "typedoc",
     "test:node": "mocha",
-    "test:browser": "karma start .karma.cjs",
+    "test:browser": "karma start .karma.cjs --single-run",
     "test": "run-s build test:*",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build": "run-s clean build:*",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "dev": "run-p -ln dev:*",
+    "dev:build": "tsc -w -p tsconfig.esm.json",
+    "dev:test:node": "mocha --parallel --watch",
+    "dev:test:browser": "karma start .karma.cjs"
   },
   "devDependencies": {
+    "@endyjasmi/karma-playwright-launcher": "^0.0.3",
     "@types/node": "16",
     "chai": "^4.3.6",
     "karma": "^6.4.1",
-    "karma-chrome-launcher": "^3.1.1",
-    "karma-firefox-launcher": "^2.1.2",
     "karma-mocha": "^2.0.1",
     "mocha": "^10.0.0",
     "npm-run-all": "^4.1.5",
+    "playwright": "^1.27.1",
     "typedoc": "^0.23.15",
     "typescript": "^4.8.4"
   }

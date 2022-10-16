@@ -1,7 +1,8 @@
 module.exports = function (config) {
   config.set({
     frameworks: ['mocha'],
-    plugins: ['karma-mocha', 'karma-chrome-launcher', 'karma-firefox-launcher'],
+
+    plugins: ['karma-mocha', '@endyjasmi/karma-playwright-launcher'],
 
     basePath: '',
     files: [
@@ -10,11 +11,11 @@ module.exports = function (config) {
       { pattern: 'test/**/*.js', type: 'module' },
     ],
 
-    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
+    browsers: ['Chromium', 'Firefox', 'WebKit'],
 
     preprocessors: {},
     reporters: ['progress'],
-    singleRun: true,
+    singleRun: false,
     concurrency: Infinity,
   })
 }
