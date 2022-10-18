@@ -48,6 +48,8 @@ export const Precomputed = {
     },
     Messages: {
       test: 'test',
+      occulto: 'occulto',
+      weird: 'Some 🃏 weird 🃏 text',
       nietzscheIpsum:
         'Marvelous intentions joy deceptions overcome sexuality spirit against. Selfish of marvelous play dead war snare eternal-return ultimate. Reason aversion suicide.',
     },
