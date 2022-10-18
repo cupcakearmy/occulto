@@ -5,6 +5,11 @@ export const Precomputed = {
       test: 'dGVzdA==',
       'hello world': 'aGVsbG8gd29ybGQ=',
     },
+    Hex: {
+      test: '74657374',
+      occulto: '6f6363756c746f',
+      'hello world': '68656c6c6f20776f726c64',
+    },
   },
   Hash: {
     SHA_1: {
