@@ -44,7 +44,8 @@
     "dev": "run-p -ln dev:*",
     "dev:build": "tsc -w -p tsconfig.esm.json",
     "dev:test:node": "mocha --parallel --watch",
-    "dev:test:browser": "karma start .karma.cjs"
+    "dev:test:browser": "karma start .karma.cjs",
+    "prepublishOnly": "run-s clean build"
   },
   "devDependencies": {
     "@endyjasmi/karma-playwright-launcher": "^0.0.4",
