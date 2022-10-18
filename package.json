@@ -22,12 +22,11 @@
     "pnpm": "7"
   },
   "type": "module",
-  "types": "./dist/esm/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/esm/index.d.ts",
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/esm/index.d.ts"
+      "require": "./dist/cjs/index.js"
     }
   },
   "files": [
