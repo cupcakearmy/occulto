@@ -11,7 +11,7 @@ module.exports = function (config) {
       { pattern: 'test/**/*.js', type: 'module' },
     ],
 
-    browsers: ['Chromium', 'Firefox', 'WebKit'],
+    browsers: ['ChromiumHeadless', 'FirefoxHeadless', 'WebKitHeadless'],
 
     preprocessors: {},
     reporters: ['progress'],
