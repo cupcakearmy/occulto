@@ -10,6 +10,10 @@ export const Precomputed = {
       occulto: '6f6363756c746f',
       'hello world': '68656c6c6f20776f726c64',
     },
+    Bytes: {
+      test: [0x74, 0x65, 0x73, 0x74],
+      occulto: [0x6f, 0x63, 0x63, 0x75, 0x6c, 0x74, 0x6f],
+    },
   },
   Hash: {
     SHA_1: {

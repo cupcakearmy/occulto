@@ -6,3 +6,10 @@ export class Promises {
     } catch {}
   }
 }
+
+export function compareArrayLike(a, b) {
+  chai.expect(a.length).to.equal(b.length)
+  for (let i = 0; i < a.length; i++) {
+    chai.expect(a[i]).to.equal(b[i])
+  }
+}
