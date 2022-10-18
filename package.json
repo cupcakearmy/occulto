@@ -1,6 +1,6 @@
 {
   "name": "occulto",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.3",
   "description": "crypt utility",
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "pnpm": "7"
   },
   "type": "module",
+  "types": "./dist/esm/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -38,7 +39,7 @@
     "test:browser": "karma start .karma.cjs --single-run",
     "test": "run-s build test:*",
     "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && rename -S .js .cjs dist/cjs/**/*",
     "build": "run-s clean build:*",
     "clean": "rm -rf ./dist",
     "dev": "run-p -ln dev:*",
