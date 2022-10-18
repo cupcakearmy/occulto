@@ -1,4 +1,4 @@
-import { AES, Bytes, Hashes, Hex } from '../dist/esm/index.js'
+import { AES, Bytes, Hashes, Hex } from '../dist/index.js'
 import { Precomputed } from './values.js'
 
 describe('AES', () => {

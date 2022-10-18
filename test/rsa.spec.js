@@ -1,4 +1,4 @@
-import { Bytes, RSA } from '../dist/esm/index.js'
+import { Bytes, RSA } from '../dist/index.js'
 import { Promises } from './utils.js'
 import { Precomputed } from './values.js'
 

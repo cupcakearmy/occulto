@@ -1,4 +1,4 @@
-import { Base64, Bytes } from '../dist/esm/index.js'
+import { Base64, Bytes } from '../dist/index.js'
 import { Precomputed } from './values.js'
 
 describe('Encoding', () => {

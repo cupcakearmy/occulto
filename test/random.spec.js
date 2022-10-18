@@ -1,4 +1,4 @@
-import { getRandomBytes } from '../dist/esm/index.js'
+import { getRandomBytes } from '../dist/index.js'
 import { Promises } from './utils.js'
 
 describe('Random', () => {

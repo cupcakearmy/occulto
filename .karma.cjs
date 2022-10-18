@@ -7,7 +7,7 @@ module.exports = function (config) {
     basePath: '',
     files: [
       { pattern: 'node_modules/chai/chai.js', type: 'module' },
-      { pattern: 'dist/esm/**/*.js', type: 'module' },
+      { pattern: 'dist/**/*.js', type: 'module' },
       { pattern: 'test/**/*.js', type: 'module' },
     ],
 

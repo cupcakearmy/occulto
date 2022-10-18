@@ -21,12 +21,11 @@
     "pnpm": "7"
   },
   "type": "module",
-  "types": "./dist/esm/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.cjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     }
   },
   "files": [
@@ -37,12 +36,10 @@
     "test:node": "mocha",
     "test:browser": "karma start .karma.cjs --single-run",
     "test": "run-s build test:*",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json && ./rename.sh",
-    "build": "run-s clean build:*",
+    "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "run-p -ln dev:*",
-    "dev:build": "tsc -w -p tsconfig.esm.json",
+    "dev:build": "tsc -w",
     "dev:test:node": "mocha --parallel --watch",
     "dev:test:browser": "karma start .karma.cjs",
     "prepublishOnly": "run-s clean build"
