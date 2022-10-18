@@ -1,36 +1,63 @@
 {
   "name": "occulto",
-  "version": "1.0.8",
+  "version": "2.0.0-rc.7",
+  "license": "MIT",
   "description": "crypt utility",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "keywords": [
+    "isomorphic",
+    "crypto",
+    "aes",
+    "rsa"
+  ],
+  "engines": {
+    "node": ">=16",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm",
+    "pnpm": "7"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "docs": "typedoc",
+    "test:node": "mocha",
+    "test:browser": "karma start .karma.cjs --single-run",
+    "test": "run-s build test:*",
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "run-p -ln dev:*",
+    "dev:build": "tsc -w",
+    "dev:test:node": "mocha --parallel --watch",
+    "dev:test:browser": "karma start .karma.cjs",
+    "prepublishOnly": "run-s clean build"
+  },
+  "devDependencies": {
+    "@endyjasmi/karma-playwright-launcher": "^0.0.4",
+    "@types/node": "^16.11.66",
+    "chai": "^4.3.6",
+    "karma": "^6.4.1",
+    "karma-mocha": "^2.0.1",
+    "mocha": "^10.1.0",
+    "npm-run-all": "^4.1.5",
+    "playwright": "^1.27.1",
+    "typedoc": "^0.23.17",
+    "typescript": "^4.8.4"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CupCakeArmy/occulto"
+    "url": "https://github.com/cupcakearmy/occulto"
   },
-  "scripts": {
-    "docs": "typedoc --out ./docs ./src && touch ./docs/.nojekyll",
-    "build": "tsc",
-    "dev": "tsnd --respawn --no-notify src/index.ts",
-    "test": "npm run build && mocha",
-    "prepublishOnly": "rm -rf ./lib && npm run test"
-  },
-  "keywords": [
-    "crypto",
-    "chacha20",
-    "aes",
-    "rsa",
-    "high level"
-  ],
-  "author": "Niccolo Borgioli",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "11.x",
-    "@types/node-forge": "0.8.x",
-    "mocha": "6.x",
-    "ts-node-dev": "^1.0.0-pre.32",
-    "typedoc": "^0.14.2",
-    "typescript": "3.5.x"
-  },
-  "dependencies": {}
+  "author": {
+    "name": "Niccolo Borgioli",
+    "email": "opensource@nicco.io",
+    "url": "https://nicco.io"
+  }
 }
