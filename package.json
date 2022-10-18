@@ -1,17 +1,16 @@
 {
   "name": "occulto",
-  "version": "2.0.0-rc.4",
+  "version": "2.0.0-rc.5",
   "description": "crypt utility",
   "repository": {
     "type": "git",
     "url": "https://github.com/CupCakeArmy/occulto"
   },
   "keywords": [
+    "isomorphic",
     "crypto",
-    "chacha20",
     "aes",
-    "rsa",
-    "high level"
+    "rsa"
   ],
   "author": "Niccolo Borgioli",
   "license": "MIT",
@@ -22,6 +21,7 @@
     "pnpm": "7"
   },
   "type": "module",
+  "types": "./dist/esm/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
