@@ -4,7 +4,7 @@ import { Precomputed } from './values.js'
 
 describe('RSA', () => {
   describe('Generate keys', function () {
-    this.timeout(5_000)
+    this.timeout(10_000)
 
     it('Should be able to generate a keypair', async () => {
       await RSA.generateKeyPair()
