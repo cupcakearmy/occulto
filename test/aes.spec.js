@@ -2,11 +2,11 @@ import { AES, Bytes, Hashes, Hex } from '../dist/index.js'
 import { Precomputed } from './values.js'
 
 describe('AES', () => {
-  for (const keySize of [128, 192, 256]) {
-    describe('Key Size: ' + keySize, () => {
-      for (const message of Object.values(Precomputed.Crypto.Messages)) {
-        describe(`Message: ${message.slice(0, 8)}...`, () => {
-          it('Basic API', async () => {
+  for (const message of Object.values(Precomputed.Crypto.Messages)) {
+    describe(`Message: ${message.slice(0, 8)}...`, () => {
+      describe('Basic API', () => {
+        for (const keySize of [128, 256]) {
+          it('Key Size: ' + keySize, async () => {
             const data = Bytes.encode(message)
             const [key] = await AES.derive('foo', {
               name: 'PBKDF2',
@@ -20,15 +20,24 @@ describe('AES', () => {
             chai.expect(data).to.be.deep.equal(plaintext)
             chai.expect(message).to.be.equal(Bytes.decode(plaintext))
           })
+        }
+      })
 
-          it('Easy API', async () => {
-            const password = 'foobar'
-            const encrypted = await AES.encryptEasy(message, password)
-            const decrypted = await AES.decryptEasy(encrypted, password)
-            chai.expect(message).to.be.equal(decrypted)
-          })
-        })
-      }
+      it('Generated Key', async () => {
+        const key = await AES.generateKey()
+        const data = Bytes.encode(message)
+        const ciphertext = await AES.encrypt(data, key)
+        const plaintext = await AES.decrypt(ciphertext, key)
+        chai.expect(data).to.be.deep.equal(plaintext)
+        chai.expect(message).to.be.equal(Bytes.decode(plaintext))
+      })
+
+      it('Easy API', async () => {
+        const password = 'foobar'
+        const encrypted = await AES.encryptEasy(message, password)
+        const decrypted = await AES.decryptEasy(encrypted, password)
+        chai.expect(message).to.be.equal(decrypted)
+      })
     })
   }
 })

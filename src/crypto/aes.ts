@@ -29,7 +29,8 @@ export enum Modes {
 export class AES {
   static Modes = Modes
 
-  private static delimiter = '--' // delimiter with a character that is not allowed in base64 or hex
+  // delimiter with a character that is not allowed in base64 or hex
+  private static delimiter = '--'
   private static delimiterEasy = '---'
 
   private static InvalidCiphertext = new Error('Invalid ciphertext')
@@ -140,5 +141,19 @@ export class AES {
     const [keyDerived] = await AES.derive(key, options)
     const decrypted = await this.decrypt(data, keyDerived)
     return Bytes.decode(decrypted)
+  }
+
+  static async generateKey(): Promise<TypedArray> {
+    const c = await getCrypto()
+    const key = await c.subtle.generateKey(
+      {
+        name: 'AES-GCM',
+        length: 256,
+      },
+      true,
+      ['encrypt', 'decrypt']
+    )
+    const buffer = await c.subtle.exportKey('raw', key)
+    return new Uint8Array(buffer)
   }
 }
