@@ -33,8 +33,10 @@ npm i occulto
 ```typescript
 import { RSA } from 'occulto'
 
-const pair = await RSA.generateKeyPair()
-const encrypted = await RSA.encrypt('some text', pair.public)
+const pair = await RSA.generateKeyPair(2 ** 11)
+const bytes = Bytes.encode(message)
+
+const encrypted = await RSA.encrypt(bytes, pair.public)
 const decrypted = await RSA.decrypt(encrypted, pair.private)
 ```
 
@@ -42,11 +44,29 @@ const decrypted = await RSA.decrypt(encrypted, pair.private)
 
 [Available Modes](https://occulto.pages.dev/enums/Modes)
 
-```javascript
-import { Symmetric } from 'occulto'
+There is an _easy_ API, that will take care of everything for you.
 
-const encrypted = await Symmetric.encryptEasy('some string', 'myPass')
-const decrypted = await Symmetric.decryptEasy(encrypted, 'myPass')
+```typescript
+import { AES } from 'occulto'
+
+const password = 'foobar'
+const message = 'this is a secret'
+
+const encrypted = await AES.encryptEasy(message, password)
+const decrypted = await AES.decryptEasy(encrypted, password)
+```
+
+The low level API is also exposed for advanced usages.
+
+```typescript
+import { AES } from 'occulto'
+
+const message = 'this is a secret'
+const key = await AES.generateKey()
+const data = Bytes.encode(message)
+
+const ciphertext = await AES.encrypt(data, key)
+const plaintext = await AES.decrypt(ciphertext, key)
 ```
 
 ### [Hash](https://occulto.pages.dev/classes/Hash)
@@ -54,9 +74,7 @@ const decrypted = await Symmetric.decryptEasy(encrypted, 'myPass')
 [Available hashes](https://occulto.pages.dev/enums/Hashes)
 
 ```typescript
-import { Hash } from 'occulto'
+import { Hash, Hashes } from 'occulto'
 
-const hash = Hash.digest('something')
-
-const h = Hash.digest('something', Hash.Hashes.MD5)
+const hashed = await Hash.hash('Some value', Hashes.SHA_512)
 ```
