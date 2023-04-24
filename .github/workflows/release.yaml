@@ -1,9 +1,9 @@
-name: "Publish to NPM"
+name: 'Publish to NPM'
 
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 jobs:
   build:
@@ -16,13 +16,13 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          registry-url: "https://registry.npmjs.org"
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
 
       - name: Install dependencies
         run: pnpm install

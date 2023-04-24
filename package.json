@@ -13,7 +13,7 @@
     "node": ">=16",
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm",
-    "pnpm": "7"
+    "pnpm": ">=8"
   },
   "type": "module",
   "types": "./dist/index.d.ts",
@@ -41,15 +41,15 @@
   },
   "devDependencies": {
     "@endyjasmi/karma-playwright-launcher": "^0.0.4",
-    "@types/node": "^16.18.11",
+    "@types/node": "^16.18.24",
     "chai": "^4.3.7",
-    "karma": "^6.4.1",
+    "karma": "^6.4.2",
     "karma-mocha": "^2.0.1",
     "mocha": "^10.2.0",
     "npm-run-all": "^4.1.5",
-    "playwright": "^1.29.2",
-    "typedoc": "^0.23.24",
-    "typescript": "^4.9.4"
+    "playwright": "^1.32.3",
+    "typedoc": "^0.24.6",
+    "typescript": "^5.0.4"
   },
   "repository": {
     "type": "git",
