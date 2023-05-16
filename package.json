@@ -1,6 +1,6 @@
 {
   "name": "occulto",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "packageManager": "pnpm@8.4.0",
   "license": "MIT",
   "description": "crypt utility",
