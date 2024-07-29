@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RSA > Generate keys > Should not be able to generate a key below 2048bit 1`] = `[Error: bit sizes below 2048 are considered insecure.]`;
+
+exports[`RSA > Generate keys > Should not be able to generate a key below 2048bit 2`] = `[Error: bit sizes below 2048 are considered insecure.]`;

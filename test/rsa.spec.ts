@@ -1,11 +1,11 @@
+import { describe } from 'vitest'
 import { Bytes, RSA } from '../dist/index.js'
-import { Promises } from './utils.js'
 import { Precomputed } from './values.js'
+import { it } from 'vitest'
+import { expect } from 'vitest'
 
 describe('RSA', () => {
   describe('Generate keys', function () {
-    this.timeout(10_000)
-
     it('Should be able to generate a keypair', async () => {
       await RSA.generateKeyPair()
     })
@@ -16,10 +16,10 @@ describe('RSA', () => {
       await RSA.generateKeyPair(4096)
     })
     it('Should not be able to generate a key below 2048bit', async () => {
-      await Promises.reject(() => RSA.generateKeyPair(1024))
+      await expect(() => RSA.generateKeyPair(1024)).rejects.toThrowErrorMatchingSnapshot()
     })
     it('Should not be able to generate a key below 2048bit', async () => {
-      await Promises.reject(() => RSA.generateKeyPair(-1))
+      await expect(() => RSA.generateKeyPair(-1)).rejects.toThrowErrorMatchingSnapshot()
     })
   })
 
@@ -30,10 +30,9 @@ describe('RSA', () => {
         const bytes = Bytes.encode(message)
         try {
           const encrypted = await RSA.encrypt(bytes, pair.public)
-          chai.expect.fail('Should have thrown error')
           const decrypted = await RSA.decrypt(encrypted, pair.private)
-          chai.expect(decrypted).to.be.deep.equal(bytes)
-          chai.expect(message).to.be.equal(Bytes.decode(decrypted))
+          expect(decrypted).toEqual(bytes)
+          expect(message).toEqual(Bytes.decode(decrypted))
         } catch {}
       })
     }

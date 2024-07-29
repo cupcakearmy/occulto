@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Random > Should throw error on empty array 1`] = `[Error: Invalid number of bytes]`;
+
+exports[`Random > Should throw error on negative bytes 1`] = `[Error: Invalid number of bytes]`;

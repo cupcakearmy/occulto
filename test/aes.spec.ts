@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import { AES, Bytes, Hashes, Hex } from '../dist/index.js'
 import { Precomputed } from './values.js'
 
@@ -15,10 +16,10 @@ describe('AES', () => {
               length: keySize,
               salt: Hex.decode(Precomputed.Crypto.Bytes[16]),
             })
-            const ciphertext = await AES.encrypt(data, key, AES.Modes.GCM)
+            const ciphertext = await AES.encrypt(data, key, AES.Modes.AES_GCM)
             const plaintext = await AES.decrypt(ciphertext, key)
-            chai.expect(data).to.be.deep.equal(plaintext)
-            chai.expect(message).to.be.equal(Bytes.decode(plaintext))
+            expect(data.buffer).toEqual(plaintext.buffer)
+            expect(message).toEqual(Bytes.decode(plaintext))
           })
         }
       })
@@ -28,15 +29,15 @@ describe('AES', () => {
         const data = Bytes.encode(message)
         const ciphertext = await AES.encrypt(data, key)
         const plaintext = await AES.decrypt(ciphertext, key)
-        chai.expect(data).to.be.deep.equal(plaintext)
-        chai.expect(message).to.be.equal(Bytes.decode(plaintext))
+        expect(data.buffer).toEqual(plaintext.buffer)
+        expect(message).toEqual(Bytes.decode(plaintext))
       })
 
       it('Easy API', async () => {
         const password = 'foobar'
         const encrypted = await AES.encryptEasy(message, password)
         const decrypted = await AES.decryptEasy(encrypted, password)
-        chai.expect(message).to.be.equal(decrypted)
+        expect(message).toEqual(decrypted)
       })
     })
   }
