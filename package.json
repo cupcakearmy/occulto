@@ -18,14 +18,12 @@
     "email": "opensource@nicco.io",
     "url": "https://nicco.io"
   },
+  "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js"
   },
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -41,20 +39,17 @@
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.5",
-    "@types/node": "^22.0.0",
-    "@vitest/browser": "^2.0.4",
+    "@types/node": "^22.5.2",
+    "@vitest/browser": "^2.0.5",
     "npm-run-all": "^4.1.5",
-    "playwright": "^1.45.3",
-    "typedoc": "^0.26.5",
+    "playwright": "^1.46.1",
+    "typedoc": "^0.26.6",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.4",
-    "zx": "^8.1.4"
+    "vitest": "^2.0.5",
+    "zx": "^8.1.5"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.8.0",
   "engines": {
-    "node": ">=16",
-    "npm": "please-use-pnpm",
-    "pnpm": ">=8",
-    "yarn": "please-use-pnpm"
+    "node": ">=18"
   }
 }
