@@ -1,4 +1,3 @@
-import { type TypedArray } from '../utils/base.js'
 import { getCrypto } from './crypto.js'
 import { Bytes, Hex } from './encoding.js'
 
@@ -21,8 +20,8 @@ export enum Hashes {
 
 export class Hash {
   static async hash(data: string, hash: Hashes): Promise<string>
-  static async hash(data: TypedArray, hash: Hashes): Promise<TypedArray>
-  static async hash(data: string | TypedArray, hash: Hashes): Promise<string | TypedArray> {
+  static async hash(data: ArrayBufferLike, hash: Hashes): Promise<ArrayBufferLike>
+  static async hash(data: string | ArrayBufferLike, hash: Hashes): Promise<string | ArrayBufferLike> {
     const isString = typeof data === 'string'
     const c = await getCrypto()
     const result = await c.subtle.digest(hash, isString ? Bytes.encode(data) : data)

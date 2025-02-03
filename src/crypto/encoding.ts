@@ -1,9 +1,9 @@
-import { split, type TypedArray } from '../utils/base.js'
+import { split } from '../utils/base.js'
 
 export class Base64 {
   private static prefix = 'data:application/octet-stream;base64,'
 
-  static encode(s: TypedArray): Promise<string> {
+  static encode(s: ArrayBufferLike): Promise<string> {
     return split({
       async node() {
         return Buffer.from(s).toString('base64')
@@ -22,7 +22,7 @@ export class Base64 {
     })
   }
 
-  static decode(s: string): Promise<TypedArray> {
+  static decode(s: string): Promise<ArrayBufferLike> {
     return split({
       async node() {
         return Buffer.from(s, 'base64')
@@ -38,7 +38,7 @@ export class Base64 {
 }
 
 export class Hex {
-  static encode(buffer: TypedArray): string {
+  static encode(buffer: ArrayBufferLike): string {
     let s = ''
     for (const i of new Uint8Array(buffer)) {
       s += i.toString(16).padStart(2, '0')
@@ -46,7 +46,7 @@ export class Hex {
     return s
   }
 
-  static decode(s: string): TypedArray {
+  static decode(s: string): ArrayBufferLike {
     const size = s.length / 2
     const buffer = new Uint8Array(size)
     for (let i = 0; i < size; i++) {
@@ -59,7 +59,7 @@ export class Hex {
 }
 
 export class Bytes {
-  static decode(data: TypedArray): string {
+  static decode(data: ArrayBufferLike): string {
     return split({
       node() {
         return Buffer.from(data).toString('utf-8')
@@ -70,7 +70,7 @@ export class Bytes {
     })
   }
 
-  static encode(data: string): TypedArray {
+  static encode(data: string): ArrayBufferLike {
     return split({
       node() {
         return Buffer.from(data)

@@ -1,4 +1,3 @@
-import { type TypedArray } from '../utils/base.js'
 import { getCrypto } from './crypto.js'
 import { Base64, Bytes } from './encoding.js'
 import { Hashes } from './hash.js'
@@ -15,7 +14,7 @@ export type KeyData = {
   name: 'PBKDF2'
   hash: Hashes
   iterations: number
-  salt: TypedArray
+  salt: ArrayBufferLike
   length: number
 }
 
@@ -35,12 +34,12 @@ export class AES {
 
   private static InvalidCiphertext = new Error('Invalid ciphertext')
 
-  private static async join(...args: TypedArray[]): Promise<string> {
+  private static async join(...args: ArrayBufferLike[]): Promise<string> {
     const strings = await Promise.all(args.map(Base64.encode))
     return strings.join(AES.delimiter)
   }
 
-  private static async split(ciphertext: string): Promise<TypedArray[]> {
+  private static async split(ciphertext: string): Promise<ArrayBufferLike[]> {
     const splitted = ciphertext.split(AES.delimiter)
     return Promise.all(splitted.map(Base64.decode))
   }
@@ -49,7 +48,7 @@ export class AES {
    * Derive a key from a password.
    * To be used if the password is not 128, 192 or 256 bits or human made, non generated keys.
    */
-  static async derive(key: string, options?: KeyData): Promise<[TypedArray, KeyData]> {
+  static async derive(key: string, options?: KeyData): Promise<[ArrayBufferLike, KeyData]> {
     options ??= {
       name: 'PBKDF2',
       hash: Hashes.SHA_512,
@@ -66,7 +65,7 @@ export class AES {
     return [new Uint8Array(bits), options]
   }
 
-  static async encrypt(data: TypedArray, key: TypedArray, mode: Modes = Modes.AES_GCM): Promise<string> {
+  static async encrypt(data: ArrayBufferLike, key: ArrayBufferLike, mode: Modes = Modes.AES_GCM): Promise<string> {
     const c = await getCrypto()
 
     let iv: Uint8Array
@@ -88,7 +87,7 @@ export class AES {
     return AES.join(Bytes.encode(alg), iv, encryptedBuffer)
   }
 
-  static async decrypt(ciphertext: string, key: TypedArray): Promise<TypedArray> {
+  static async decrypt(ciphertext: string, key: ArrayBufferLike): Promise<ArrayBufferLike> {
     const c = await getCrypto()
 
     const [alg, iv, data] = await AES.split(ciphertext)
@@ -107,7 +106,7 @@ export class AES {
     return new Uint8Array(decrypted)
   }
 
-  static async encryptEasy(data: string | TypedArray, key: string, mode: Modes = Modes.AES_GCM): Promise<string> {
+  static async encryptEasy(data: string | ArrayBufferLike, key: string, mode: Modes = Modes.AES_GCM): Promise<string> {
     const dataBuffer = typeof data === 'string' ? Bytes.encode(data) : data
     const [keyDerived, options] = await AES.derive(key)
 
@@ -143,7 +142,7 @@ export class AES {
     return Bytes.decode(decrypted)
   }
 
-  static async generateKey(): Promise<TypedArray> {
+  static async generateKey(): Promise<ArrayBufferLike> {
     const c = await getCrypto()
     const key = await c.subtle.generateKey(
       {
