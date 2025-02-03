@@ -5,6 +5,9 @@
   "name": "Occulto",
   "includeVersion": true,
 
+  "plugin": ["typedoc-material-theme"],
+  "themeColor": "#cb9820",
+
   "excludeInternal": true,
   "excludePrivate": true
 }

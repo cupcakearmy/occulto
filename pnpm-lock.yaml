@@ -26,6 +26,9 @@ importers:
       typedoc:
         specifier: ^0.27.6
         version: 0.27.6(typescript@5.7.3)
+      typedoc-material-theme:
+        specifier: ^1.3.0
+        version: 1.3.0(typedoc@0.27.6(typescript@5.7.3))
       typescript:
         specifier: ^5.7.3
         version: 5.7.3
@@ -242,6 +245,9 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
+
+  '@material/material-color-utilities@0.3.0':
+    resolution: {integrity: sha512-ztmtTd6xwnuh2/xu+Vb01btgV8SQWYCaK56CkRK8gEkWe5TuDyBcYJ0wgkMRn+2VcE9KUmhvkz+N9GHrqw/C0g==}
 
   '@mswjs/interceptors@0.37.6':
     resolution: {integrity: sha512-wK+5pLK5XFmgtH3aQ2YVvA3HohS3xqV/OxuVOdNx9Wpnz7VE/fnC+e1A7ln6LFYeck7gOJ/dsZV6OLplOtAJ2w==}
@@ -1258,6 +1264,12 @@ packages:
     resolution: {integrity: sha512-3KS2b+kL7fsuk/eJZ7EQdnEmQoaho/r6KUef7hxvltNA5DR8NAUM+8wJMbJyZ4G9/7i3v5zPBIMN5aybAh2/Jg==}
     engines: {node: '>= 0.4'}
 
+  typedoc-material-theme@1.3.0:
+    resolution: {integrity: sha512-4vY68NUBBkMc3gKAltDtvT0KbIYX1uaFAT/3brDwhnUxhfTiYRtfg8VXR2lr8f+9VNDh7BfEtj8gpRO7Y93TWQ==}
+    engines: {node: '>=18.0.0', npm: '>=8.6.0'}
+    peerDependencies:
+      typedoc: ^0.25.13 || ^0.26.x || ^0.27.x
+
   typedoc@0.27.6:
     resolution: {integrity: sha512-oBFRoh2Px6jFx366db0lLlihcalq/JzyCVp7Vaq1yphL/tbgx2e+bkpkCgJPunaPvPwoTOXSwasfklWHm7GfAw==}
     engines: {node: '>= 18'}
@@ -1564,6 +1576,8 @@ snapshots:
       '@types/node': 22.13.0
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
+
+  '@material/material-color-utilities@0.3.0': {}
 
   '@mswjs/interceptors@0.37.6':
     dependencies:
@@ -2716,6 +2730,11 @@ snapshots:
       is-typed-array: 1.1.15
       possible-typed-array-names: 1.0.0
       reflect.getprototypeof: 1.0.10
+
+  typedoc-material-theme@1.3.0(typedoc@0.27.6(typescript@5.7.3)):
+    dependencies:
+      '@material/material-color-utilities': 0.3.0
+      typedoc: 0.27.6(typescript@5.7.3)
 
   typedoc@0.27.6(typescript@5.7.3):
     dependencies:
