@@ -1,4 +1,3 @@
-import type { TypedArray } from '../utils/base.js'
 import { getCrypto } from './crypto.js'
 import { Base64 } from './encoding.js'
 
@@ -71,7 +70,8 @@ class Key {
     // @ts-ignore
     const mod = key?.algorithm?.modulusLength
     if (isNaN(mod)) throw Constants.error.invalidKey
-    return mod / 8 - (2 * 512) / 8 - 2
+    const maxBytes = mod / 8 - (2 * 512) / 8 - 2
+    return maxBytes
   }
 }
 
@@ -100,7 +100,7 @@ export class RSA {
     }
   }
 
-  static async encrypt(data: TypedArray, key: string): Promise<TypedArray> {
+  static async encrypt(data: ArrayBufferLike, key: string): Promise<ArrayBufferLike> {
     let keyObj: CryptoKey
     try {
       keyObj = await Key.decode(key)
@@ -112,14 +112,14 @@ export class RSA {
     }
 
     // Check if data is too large
-    if (data.length > Key.getMaxMessageSize(keyObj)) throw Constants.error.dataTooLong
+    if (new Uint8Array(data).byteLength > Key.getMaxMessageSize(keyObj)) throw Constants.error.dataTooLong
 
     const c = await getCrypto()
     const encrypted = await c.subtle.encrypt({ name: Constants.name }, keyObj, data)
     return new Uint8Array(encrypted)
   }
 
-  static async decrypt(data: TypedArray, key: string): Promise<TypedArray> {
+  static async decrypt(data: ArrayBufferLike, key: string): Promise<ArrayBufferLike> {
     let keyObj: CryptoKey
     try {
       keyObj = await Key.decode(key)
