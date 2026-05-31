@@ -1,20 +1,17 @@
-import { isBrowser } from '../utils/base.js'
+import { isBrowser } from "../utils/base.js";
 
-let crypto: typeof window.crypto | null = null
+let crypto: Crypto | null = null;
 
-export async function getCrypto(): Promise<typeof window.crypto> {
+export async function getCrypto(): Promise<Crypto> {
   if (!crypto) {
-    if (isBrowser) crypto = window.crypto
-    else if (typeof require !== 'undefined') {
-      const { webcrypto } = await require('crypto')
-      crypto = webcrypto
-    } else {
-      // @ts-ignore
-      const { webcrypto } = await import('crypto')
-      crypto = webcrypto as any
+    if (isBrowser) {
+      crypto = window.crypto;
+    }
+    if (typeof globalThis !== "undefined") {
+      crypto = globalThis.crypto;
     }
   }
 
-  if (!crypto) throw new Error('No crypto available')
-  return crypto
+  if (!crypto) throw new Error("No crypto available");
+  return crypto;
 }
